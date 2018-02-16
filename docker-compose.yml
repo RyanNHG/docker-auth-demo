@@ -1,0 +1,25 @@
+version: '3'
+services:
+
+  web:
+    build: ./web
+    image: ryannhg/nginx-web
+
+  proxy:
+    build: ./proxy
+    image: ryannhg/nginx-proxy
+    ports:
+      - 7000:80
+    volumes:
+      - shared:/etc/shared
+    depends_on:
+      - passgen
+
+  passgen:
+    image: httpd
+    volumes:
+      - shared:/etc/shared
+    command: htpasswd -bc /etc/shared/.htpasswd username password
+
+volumes:
+  shared:
