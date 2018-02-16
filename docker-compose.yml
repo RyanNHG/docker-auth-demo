@@ -5,9 +5,9 @@ services:
     build: ./web
     image: ryannhg/nginx-web
 
-  proxy:
-    build: ./proxy
-    image: ryannhg/nginx-proxy
+  auth:
+    build: ./auth
+    image: ryannhg/nginx-auth
     ports:
       - 7000:80
     volumes:
